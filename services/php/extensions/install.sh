@@ -467,6 +467,17 @@ if [[ -z "${EXTENSIONS##*,redis,*}" ]]; then
     fi
 fi
 
+if [[ -z "${EXTENSIONS##*,libsodium,*}" ]]; then
+    echo "---------- Install libsodium-1.0.6 ----------"
+    isPhpVersionGreaterOrEqual 7 0
+    if [[ "$?" = "1" ]]; then
+        installExtensionFromTgz libsodium-1.0.6
+    else
+        printf "\n" | pecl install libsodium-1.0.6
+        docker-php-ext-enable libsodium
+    fi
+fi
+
 if [[ -z "${EXTENSIONS##*,apcu,*}" ]]; then
     echo "---------- Install apcu ----------"
     installExtensionFromTgz apcu-5.1.17

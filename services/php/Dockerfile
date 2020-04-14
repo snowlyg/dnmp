@@ -28,8 +28,6 @@ RUN apk --no-cache add tzdata \
 RUN apk add gnu-libiconv libstdc++ --no-cache --repository http://${CONTAINER_PACKAGE_URL}/alpine/edge/community/ --allow-untrusted
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
-RUN apk add php5.6-dev php-pear &&  pecl install libsodium-1.0.6
-
 # Install composer and change it's cache home
 RUN curl -o /usr/bin/composer https://mirrors.aliyun.com/composer/composer.phar \
     && chmod +x /usr/bin/composer
