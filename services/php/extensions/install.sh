@@ -468,10 +468,11 @@ if [[ -z "${EXTENSIONS##*,redis,*}" ]]; then
 fi
 
 if [[ -z "${EXTENSIONS##*,libsodium,*}" ]]; then
-    echo "---------- Install libsodium-1.0.6 ----------"
+    echo "---------- Install libsodium ----------"
+     apk add --no-cache libsodium-dev
     isPhpVersionGreaterOrEqual 7 0
     if [[ "$?" = "1" ]]; then
-        installExtensionFromTgz libsodium-1.0.6
+        installExtensionFromTgz libsodium
     else
         printf "\n" | pecl install libsodium-1.0.6
         docker-php-ext-enable libsodium
