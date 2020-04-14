@@ -5,8 +5,8 @@ ARG TZ
 ARG PHP_EXTENSIONS
 ARG CONTAINER_PACKAGE_URL
 
-RUN sed -i "s/dl-cdn.alpinelinux.org/${CONTAINER_PACKAGE_URL}/g" /etc/apk/repositories
 
+RUN sed -i "s/dl-cdn.alpinelinux.org/${CONTAINER_PACKAGE_URL}/g" /etc/apk/repositories
 
 
 COPY ./extensions /tmp/extensions
@@ -28,7 +28,7 @@ RUN apk --no-cache add tzdata \
 RUN apk add gnu-libiconv libstdc++ --no-cache --repository http://${CONTAINER_PACKAGE_URL}/alpine/edge/community/ --allow-untrusted
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
-RUN apk dd php5.6-dev php-pear &&  pecl install libsodium-1.0.6
+RUN apk add php5.6-dev php-pear &&  pecl install libsodium-1.0.6
 
 # Install composer and change it's cache home
 RUN curl -o /usr/bin/composer https://mirrors.aliyun.com/composer/composer.phar \
