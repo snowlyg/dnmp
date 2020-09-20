@@ -34,6 +34,7 @@ services:
       - ${IRISADMIAPI_DATA_DIR}:/go/src/github.com/snowlyg/IrisAdminApi/data/:rw
       - ${IRISADMIAPI_APPLICATION_DIR}:/go/src/github.com/snowlyg/IrisAdminApi/application.yml:rw
       - ${IRISADMIAPI_RBAC_MODEL_DIR}:/go/src/github.com/snowlyg/IrisAdminApi/rbac_model.conf:rw
+      - ${IRISADMIAPI_LOG_DIR}:/go/src/github.com/snowlyg/IrisAdminApi/logs:rw
     environment:
       TZ: "$TZ"
     restart: always
