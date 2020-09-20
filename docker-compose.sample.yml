@@ -26,10 +26,7 @@ services:
       - default
 
   irisadminapi:
-    build:
-      context: ./services/irisadminapi
-      args:
-        IRISADMIAPI_VERSION: ${IRISADMIAPI_VERSION}
+    image: dreamfish/irisadminapi:${IRISADMIAPI_VERSION}
     container_name: irisadminapi
     ports:
       - "${IRISADMIAPI_HTTP_HOST_PORT}:80"
