@@ -7,6 +7,6 @@ db:
   adapter: mysql # mysql postgres sqlite3
   host: mysql5
   port: 3306
-  name: irisadminapi
+  name: goirisapi
   user: root
   password: 123456
