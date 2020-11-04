@@ -51,6 +51,7 @@ services:
       - ${BLOG_APPLICATION_DIR}:/go/src/github.com/snowlyg/blog/application.yml:rw
       - ${BLOG_RBAC_MODEL_DIR}:/go/src/github.com/snowlyg/blog/rbac_model.conf:rw
       - ${BLOG_LOG_DIR}:/go/src/github.com/snowlyg/blog/logs:rw
+      - ${BLOG_UPLOADS_DIR}:/go/src/github.com/snowlyg/blog/uploads:rw
     environment:
       TZ: "$TZ"
     restart: always
