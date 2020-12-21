@@ -8,7 +8,6 @@ ARG CONTAINER_PACKAGE_URL
 
 RUN sed -i "s/dl-cdn.alpinelinux.org/${CONTAINER_PACKAGE_URL}/g" /etc/apk/repositories
 
-
 COPY ./extensions /tmp/extensions
 WORKDIR /tmp/extensions
 RUN chmod +x install.sh \
@@ -22,6 +21,8 @@ RUN chmod uga+x /usr/local/bin/install-php-extensions
 RUN apk --no-cache add tzdata \
     && cp "/usr/share/zoneinfo/$TZ" /etc/localtime \
     && echo "$TZ" > /etc/timezone
+
+RUN apk add git
 
 
 # Fix: https://github.com/docker-library/php/issues/240

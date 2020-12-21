@@ -25,38 +25,38 @@ services:
     networks:
       - default
 
-  irisadminapi:
-    image: "irisadminapi:dev"
-    container_name: irisadminapi
-    ports:
-      - "8085:80"
-    volumes:
-      - ./services/irisadminapi/data:/go/src/github.com/snowlyg/IrisAdminApi/data/:rw
-      - ./services/irisadminapi/application.yml:/go/src/github.com/snowlyg/IrisAdminApi/application.yml:rw
-      - ./services/irisadminapi/rbac_model.conf:/go/src/github.com/snowlyg/IrisAdminApi/rbac_model.conf:rw
-      - ./services/irisadminapi/logs:/go/src/github.com/snowlyg/IrisAdminApi/logs:rw
-    environment:
-      TZ: "Asia/Shanghai"
-    restart: always
-    networks:
-      - default
-
-  blog:
-    image: "blog:dev"
-    container_name: blog
-    ports:
-      - "8086:80"
-    volumes:
-      - ./services/blog/data:/go/src/github.com/snowlyg/blog/data/:rw
-      - ./services/blog/application.yml:/go/src/github.com/snowlyg/blog/application.yml:rw
-      - ./services/blog/rbac_model.conf:/go/src/github.com/snowlyg/blog/rbac_model.conf:rw
-      - ./services/blog/logs:/go/src/github.com/snowlyg/blog/logs:rw
-      - ./services/blog/uploads:/go/src/github.com/snowlyg/blog/uploads:rw
-    environment:
-      TZ: "Asia/Shanghai"
-    restart: always
-    networks:
-      - default
+#  irisadminapi:
+#    image: "irisadminapi:dev"
+#    container_name: irisadminapi
+#    ports:
+#      - "8085:80"
+#    volumes:
+#      - ./services/irisadminapi/data:/go/src/github.com/snowlyg/IrisAdminApi/data/:rw
+#      - ./services/irisadminapi/application.yml:/go/src/github.com/snowlyg/IrisAdminApi/application.yml:rw
+#      - ./services/irisadminapi/rbac_model.conf:/go/src/github.com/snowlyg/IrisAdminApi/rbac_model.conf:rw
+#      - ./services/irisadminapi/logs:/go/src/github.com/snowlyg/IrisAdminApi/logs:rw
+#    environment:
+#      TZ: "Asia/Shanghai"
+#    restart: always
+#    networks:
+#      - default
+#
+#  blog:
+#    image: "blog:dev"
+#    container_name: blog
+#    ports:
+#      - "8086:80"
+#    volumes:
+#      - ./services/blog/data:/go/src/github.com/snowlyg/blog/data/:rw
+#      - ./services/blog/application.yml:/go/src/github.com/snowlyg/blog/application.yml:rw
+#      - ./services/blog/rbac_model.conf:/go/src/github.com/snowlyg/blog/rbac_model.conf:rw
+#      - ./services/blog/logs:/go/src/github.com/snowlyg/blog/logs:rw
+#      - ./services/blog/uploads:/go/src/github.com/snowlyg/blog/uploads:rw
+#    environment:
+#      TZ: "Asia/Shanghai"
+#    restart: always
+#    networks:
+#      - default
 
   php:
     build:
@@ -64,7 +64,7 @@ services:
       args:
         PHP_VERSION: php:7.4.1-fpm-alpine
         CONTAINER_PACKAGE_URL: mirrors.aliyun.com
-        PHP_EXTENSIONS: "pdo_mysql,mysqli,mbstring,gd,curl,opcache"
+        PHP_EXTENSIONS: "pdo_mysql,mysqli,mbstring,gd,curl,opcache,soap,amqp"
         TZ: "Asia/Shanghai"
     container_name: php
     expose:
@@ -83,28 +83,28 @@ services:
     networks:
       - default
 
-  php56:
-    build:
-      context: ./services/php
-      args:
-        PHP_VERSION: php:5.6.40-fpm-alpine
-        CONTAINER_PACKAGE_URL: mirrors.aliyun.com
-        PHP_EXTENSIONS: "pdo_mysql,mysqli,mbstring,gd,curl,opcache"
-        TZ: "Asia/Shanghai"
-    container_name: php56
-    expose:
-      - 9501
-    volumes:
-      - ./www:/www/:rw
-      - ./services/php/php.ini:/usr/local/etc/php/php.ini:ro
-      - ./services/php/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf:rw
-      - ./logs/php:/var/log/php
-      - ./data/composer:/tmp/composer
-    restart: always
-    cap_add:
-      - SYS_PTRACE
-    networks:
-      - default
+#  php56:
+#    build:
+#      context: ./services/php
+#      args:
+#        PHP_VERSION: php:5.6.40-fpm-alpine
+#        CONTAINER_PACKAGE_URL: mirrors.aliyun.com
+#        PHP_EXTENSIONS: "pdo_mysql,mysqli,mbstring,gd,curl,opcache"
+#        TZ: "Asia/Shanghai"
+#    container_name: php56
+#    expose:
+#      - 9501
+#    volumes:
+#      - ./www:/www/:rw
+#      - ./services/php/php.ini:/usr/local/etc/php/php.ini:ro
+#      - ./services/php/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf:rw
+#      - ./logs/php:/var/log/php
+#      - ./data/composer:/tmp/composer
+#    restart: always
+#    cap_add:
+#      - SYS_PTRACE
+#    networks:
+#      - default
 
   #  php54:
   #    build:
@@ -201,19 +201,19 @@ services:
   #    networks:
   #      - default
 
-  #  rabbitmq:
-  #    image: rabbitmq:management
-  #    container_name: rabbitmq
-  #    restart: always
-  #    ports:
-  #      - "5672:5672"
-  #      - "15672:15672"
-  #    environment:
-  #       TZ: "Asia/Shanghai"
-  #       RABBITMQ_DEFAULT_USER: "myuser"
-  #       RABBITMQ_DEFAULT_PASS: "mypass"
-  #    networks:
-  #          - default
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+       TZ: "Asia/Shanghai"
+       RABBITMQ_DEFAULT_USER: "myuser"
+       RABBITMQ_DEFAULT_PASS: "mypass"
+    networks:
+          - default
 
   # phpmyadmin:
   #  image: phpmyadmin/phpmyadmin:latest
