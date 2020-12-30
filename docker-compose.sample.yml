@@ -62,9 +62,9 @@ services:
     build:
       context: ./services/php
       args:
-        PHP_VERSION: php:7.4.1-fpm-alpine
+        PHP_VERSION: php:7.3-fpm-alpine
         CONTAINER_PACKAGE_URL: mirrors.aliyun.com
-        PHP_EXTENSIONS: "pdo_mysql,mysqli,mbstring,gd,curl,opcache,soap,amqp"
+        PHP_EXTENSIONS: "pdo_mysql,mysqli,mbstring,gd,curl,opcache,soap,amqp,bcmath,pcntl,redis"
         TZ: "Asia/Shanghai"
     container_name: php
     expose:
@@ -127,20 +127,20 @@ services:
   #    networks:
   #      - default
 
-  # mysql:
-  #   image: mysql:8.0.13
-  #   container_name: mysql
-  #   ports:
-  #     - "3306:3306"
-  #   volumes:
-  #     - ./services/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
-  #     - ./data/mysql:/var/lib/mysql/:rw
-  #   restart: always
-  #   networks:
-  #     - default
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: "123456"
-  #     TZ: "Asia/Shanghai"
+  mysql:
+   image: mysql:8.0.13
+   container_name: mysql
+   ports:
+     - "3306:3306"
+   volumes:
+     - ./services/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
+     - ./data/mysql:/var/lib/mysql/:rw
+   restart: always
+   networks:
+     - default
+   environment:
+     MYSQL_ROOT_PASSWORD: "123456"
+     TZ: "Asia/Shanghai"
 
   mysql5:
     image: mysql:5.7.28
