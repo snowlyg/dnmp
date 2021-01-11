@@ -11,3 +11,4 @@ www/*
 !www/localhost/
 deploy.sh
 deploy_blog.sh
+frpc.ini

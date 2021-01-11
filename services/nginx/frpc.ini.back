@@ -1,0 +1,9 @@
+[common]
+server_addr = ip
+server_port = 7000
+token = token
+
+[web]
+type = http
+local_port = 8060
+subdomain = wechat
