@@ -517,7 +517,7 @@ if [[ -z "${EXTENSIONS##*,xdebug,*}" ]]; then
         if [[ "$?" = "1" ]]; then
             installExtensionFromTgz xdebug-2.9.2
         else
-            installExtensionFromTgz xdebug-2.6.1
+            installExtensionFromTgz xdebug-2.9.2
         fi
     else
         installExtensionFromTgz xdebug-2.5.5
