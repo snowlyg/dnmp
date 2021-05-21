@@ -34,6 +34,8 @@ RUN curl -o /usr/bin/composer https://mirrors.aliyun.com/composer/composer.phar 
     && chmod +x /usr/bin/composer
 ENV COMPOSER_HOME=/tmp/composer
 
+Run composer config -g repo.packagist composer https://mirrors.aliyun.com/composer
+
 # php image's www-data user uid & gid are 82, change them to 1000 (primary user)
 RUN apk --no-cache add shadow && usermod -u 1000 www-data && groupmod -g 1000 www-data
 
