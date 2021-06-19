@@ -29,6 +29,9 @@ RUN apk add git
 RUN apk add gnu-libiconv libstdc++ --no-cache --repository http://${CONTAINER_PACKAGE_URL}/alpine/edge/community/ --allow-untrusted
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
+COPY ./extensions/swoole_loader73.so /usr/local/lib/php/extensions/no-debug-non-zts-20180731/swoole_loader.so
+COPY ./extensions/docker-php-ext-swoole_loader.ini /usr/local/etc/php/conf.d/docker-php-ext-swoole_loader.ini
+
 # Install composer and change it's cache home
 RUN curl -o /usr/bin/composer https://mirrors.aliyun.com/composer/composer.phar \
     && chmod +x /usr/bin/composer
